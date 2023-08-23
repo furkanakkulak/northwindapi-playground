@@ -32,7 +32,7 @@ To get started with this project, follow these steps:
 
 ## Deployment
 
-The project has been successfully deployed and is accessible at [your-deployment-url.com](https://your-deployment-url.com). Feel free to explore the live version of the application. Please note that the project is still under active development, and additional features such as products and users will continue to be added over time. Stay tuned for further updates and enhancements!
+The project has been successfully deployed and is accessible at [https://main--sparkling-zabaione-38917a.netlify.app/](https://main--sparkling-zabaione-38917a.netlify.app/). Feel free to explore the live version of the application. Please note that the project is still under active development, and additional features such as products and users will continue to be added over time. Stay tuned for further updates and enhancements!
 
 ## Contributing
 
