@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  html,
+  body,
+  #root {
+    @apply bg-light-background dark:bg-dark-background  w-full min-h-screen;
+  }
+  nav {
+    @apply bg-light-background w-full dark:bg-dark-background py-5 px-5 md:px-20 flex items-center justify-between shadow-sm border-b border-dark-text relative dark:border-light-text h-[75px];
+
+    .logo {
+      @apply text-light-text dark:text-dark-text font-bold text-2xl tracking-widest;
+    }
+
+    .mobile-links {
+      @apply items-center flex flex-col absolute top-[75px] left-0 w-full h-[calc(100vh-75px)] bg-light-background dark:bg-dark-background z-50 p-5 rounded-b-2xl shadow-sm border-b border-dark-text dark:border-light-text;
+
+      a {
+        @apply text-light-text mt-10 dark:text-dark-text font-medium text-2xl hover:text-light-secondary dark:hover:text-dark-secondary;
+
+        &.active {
+          @apply text-light-primary dark:text-dark-primary hover:text-light-secondary dark:hover:text-dark-secondary;
+        }
+      }
+    }
+
+    .links {
+      @apply items-center space-x-5 hidden md:flex;
+
+      a {
+        @apply text-light-text dark:text-dark-text font-medium text-lg hover:text-light-secondary dark:hover:text-dark-secondary;
+
+        &.active {
+          @apply text-light-primary dark:text-dark-primary hover:text-light-secondary dark:hover:text-dark-secondary;
+        }
+      }
+      button {
+        @apply text-light-text dark:text-dark-text font-medium text-lg hover:text-dark-text dark:hover:text-light-text h-full w-auto rounded-full bg-light-primary hover:bg-light-secondary dark:bg-dark-primary dark:hover:bg-dark-secondary flex p-1.5;
+      }
+    }
+  }
+
+  main {
+    @apply bg-light-background dark:bg-dark-background px-5 md:px-20 pb-10;
+
+    .add {
+      @apply my-5 px-5 py-2.5 text-dark-text dark:text-light-text bg-light-primary dark:bg-dark-primary rounded-2xl flex items-center hover:bg-light-secondary dark:hover:bg-dark-secondary font-medium;
+    }
+  }
+
+  table {
+    @apply border-collapse table-auto w-full text-sm min-w-full text-light-text dark:text-dark-text;
+    th,
+    td {
+      @apply italic text-light-text dark:text-dark-text text-left p-4 border-b-[0.5px] border-b-dark-text dark:border-b-light-text;
+    }
+    th {
+      @apply border-b-[2px] pb-0;
+    }
+  }
+  .error {
+    @apply text-center p-5 bg-rose-500 text-dark-text dark:text-light-text rounded-2xl;
+  }
+
+  .modal {
+    @apply fixed inset-0 flex items-center justify-center z-50 w-11/12 mx-auto;
+
+    .overlay {
+      @apply absolute inset-0 bg-light-background dark:bg-dark-background opacity-75;
+    }
+    .container {
+      @apply bg-light-background dark:bg-dark-background w-96 mx-auto rounded shadow-lg z-50;
+      .header {
+        @apply px-4 py-2 bg-light-primary dark:bg-dark-primary text-dark-text dark:text-light-text rounded-t flex items-center justify-between;
+        h2 {
+          @apply text-lg font-bold;
+        }
+        .close {
+          @apply text-2xl font-extrabold text-dark-text dark:text-light-text cursor-pointer;
+        }
+      }
+      .body {
+        @apply px-4 py-2 bg-light-background dark:bg-dark-background;
+
+        label {
+          @apply text-light-text dark:text-dark-text font-medium text-xs block;
+        }
+        input {
+          @apply mt-0.5 p-1 w-full border rounded-md shadow-sm border-dark-text dark:border-light-text bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary;
+        }
+        .submit {
+          @apply my-5 px-5 py-2.5 text-dark-text dark:text-light-text bg-light-primary dark:bg-dark-primary rounded-md flex items-center justify-between mr-0 ml-auto hover:bg-light-secondary dark:hover:bg-dark-secondary font-medium;
+        }
+        .error-message {
+          @apply mb-4 text-center p-5 bg-rose-500 text-dark-text dark:text-light-text rounded-2xl text-xs;
+        }
+      }
+    }
+  }
+  .success-message {
+    @apply fixed bottom-5 right-5 text-center p-5 bg-emerald-500 text-dark-text dark:text-light-text rounded-2xl z-[100];
+  }
+}
