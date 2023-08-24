@@ -25,8 +25,8 @@ const sortData = (data, sortBy, sortDirection) => {
 
     if (sortBy.startsWith('address.')) {
       const addressKey = sortBy.split('.')[1];
-      aValue = a.address[addressKey];
-      bValue = b.address[addressKey];
+      aValue = a.address ? a.address[addressKey] : ''; // Boş adres kontrolü
+      bValue = b.address ? b.address[addressKey] : ''; // Boş adres kontrolü
     }
 
     if (sortDirection === 'asc') {
@@ -56,9 +56,9 @@ const Customers = () => {
 
   const filteredData = data?.filter(
     (info) =>
-      info.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      info.address.street.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      info.address.city.toLowerCase().includes(searchTerm.toLowerCase())
+      info?.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      info?.address?.street.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      info?.address?.city.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   useEffect(() => {
@@ -112,29 +112,31 @@ const Customers = () => {
 
   return (
     <main>
-      <div className="flex flex-col md:flex-row justify-between items-center mt-5 md:mt-0">
-        <div className="flex gap-5 items-center">
+      <div className="flex  md:flex-row flex-col-reverse justify-between items-center mt-5 mb-2 md:mb-0 md:mt-0">
+        <div className="flex gap-5 items-center flex-col-reverse md:flex-row w-full md:w-auto">
           <input
-            className="p-1 border rounded-md shadow-sm border-dark-text dark:border-light-text bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary"
+            className="p-1 border rounded-md shadow-sm border-dark-text dark:border-light-text w-full md:w-auto bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary"
             placeholder="Search.."
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <label className="text-light-text dark:text-dark-text">
-            Row Count:{' '}
-          </label>
-          <select
-            className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text"
-            value={rowCount}
-            onChange={handleRowCountChange}
-          >
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
-            <option>20</option>
-            <option>25</option>
-            <option>All</option>
-          </select>
+          <div className="flex flex-row">
+            <label className="text-light-text dark:text-dark-text">
+              Row Count:{' '}
+            </label>
+            <select
+              className="bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text"
+              value={rowCount}
+              onChange={handleRowCountChange}
+            >
+              <option>5</option>
+              <option>10</option>
+              <option>15</option>
+              <option>20</option>
+              <option>25</option>
+              <option>All</option>
+            </select>
+          </div>
         </div>
         <AddCustomer />
       </div>
@@ -210,17 +212,17 @@ const Customers = () => {
                   {searchTerm &&
                     filteredData.map((info, index) => (
                       <tr key={index}>
-                        <td>{info.companyName}</td>
-                        <td>{info.address.street}</td>
-                        <td>{info.address.city}</td>
+                        <td>{info?.companyName}</td>
+                        <td>{info?.address?.street}</td>
+                        <td>{info?.address?.city}</td>
                       </tr>
                     ))}
                   {!searchTerm &&
                     paginatedData.map((info, index) => (
                       <tr key={index}>
-                        <td>{info.companyName}</td>
-                        <td>{info.address.street}</td>
-                        <td>{info.address.city}</td>
+                        <td>{info?.companyName}</td>
+                        <td>{info?.address?.street}</td>
+                        <td>{info?.address?.city}</td>
                       </tr>
                     ))}
                 </tbody>
