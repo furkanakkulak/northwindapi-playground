@@ -29,10 +29,18 @@ const sortData = (data, sortBy, sortDirection) => {
       bValue = b.address ? b.address[addressKey] : '';
     }
 
-    if (sortDirection === 'asc') {
-      return aValue.localeCompare(bValue);
+    if (aValue !== undefined && bValue !== undefined) {
+      if (sortDirection === 'asc') {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
+    }
+
+    if (aValue === undefined) {
+      return 1;
     } else {
-      return bValue.localeCompare(aValue);
+      return -1;
     }
   });
 
@@ -54,12 +62,17 @@ const Customers = () => {
     setSortColumn(null);
   };
 
-  const filteredData = data?.filter(
-    (info) =>
-      info?.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      info?.address?.street.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      info?.address?.city.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = data?.filter((info) => {
+    const companyName = info?.companyName?.toLowerCase() || '';
+    const street = info?.address?.street?.toLowerCase() || '';
+    const city = info?.address?.city?.toLowerCase() || '';
+
+    return (
+      companyName.includes(searchTerm.toLowerCase()) ||
+      street.includes(searchTerm.toLowerCase()) ||
+      city.includes(searchTerm.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     setCurrentPage(1);
