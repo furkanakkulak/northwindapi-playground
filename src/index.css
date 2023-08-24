@@ -12,7 +12,7 @@
     @apply bg-light-background w-full dark:bg-dark-background py-5 px-5 md:px-20 flex items-center justify-between shadow-sm border-b border-dark-text relative dark:border-light-text h-[75px];
 
     .logo {
-      @apply text-light-text dark:text-dark-text font-bold text-2xl tracking-widest;
+      @apply text-xl md:text-2xl bg-gradient-to-r from-light-primary dark:from-dark-primary to-light-secondary dark:to-dark-secondary bg-clip-text text-transparent font-extrabold;
     }
 
     .mobile-links {
@@ -28,10 +28,10 @@
     }
 
     .links {
-      @apply items-center space-x-5 hidden md:flex;
+      @apply items-center space-x-5 flex;
 
       a {
-        @apply text-light-text dark:text-dark-text font-medium text-lg hover:text-light-secondary dark:hover:text-dark-secondary;
+        @apply text-light-text dark:text-dark-text font-medium text-lg hover:text-light-secondary dark:hover:text-dark-secondary hidden md:block;
 
         &.active {
           @apply text-light-primary dark:text-dark-primary hover:text-light-secondary dark:hover:text-dark-secondary;
@@ -53,9 +53,12 @@
 
   table {
     @apply border-collapse table-auto w-full text-sm min-w-full text-light-text dark:text-dark-text;
+    th div {
+      @apply flex items-center gap-x-3;
+    }
     th,
     td {
-      @apply italic text-light-text dark:text-dark-text text-left p-4 border-b-[0.5px] border-b-dark-text dark:border-b-light-text;
+      @apply italic text-light-text dark:text-dark-text text-left p-1.5 md:p-4 border-b-[0.5px] border-b-dark-text dark:border-b-light-text text-xs md:text-sm;
     }
     th {
       @apply border-b-[2px] pb-0;
@@ -101,6 +104,6 @@
     }
   }
   .success-message {
-    @apply fixed bottom-5 right-5 text-center p-5 bg-emerald-500 text-dark-text dark:text-light-text rounded-2xl z-[100];
+    @apply fixed bottom-5 right-5 text-center p-2.5 md:p-5 text-xs md:text-base bg-emerald-500 text-dark-text dark:text-light-text rounded-2xl z-[100];
   }
 }

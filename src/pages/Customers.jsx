@@ -25,8 +25,8 @@ const sortData = (data, sortBy, sortDirection) => {
 
     if (sortBy.startsWith('address.')) {
       const addressKey = sortBy.split('.')[1];
-      aValue = a.address ? a.address[addressKey] : ''; // Boş adres kontrolü
-      bValue = b.address ? b.address[addressKey] : ''; // Boş adres kontrolü
+      aValue = a.address ? a.address[addressKey] : '';
+      bValue = b.address ? b.address[addressKey] : '';
     }
 
     if (sortDirection === 'asc') {
@@ -140,19 +140,19 @@ const Customers = () => {
         </div>
         <AddCustomer />
       </div>
-      <div className="border rounded-2xl border-dark-text dark:border-light-text px-5 py-10 relative">
+      <div className="border rounded-2xl border-dark-text dark:border-light-text px-2.5 py-10 md:px-5 md:py-10 relative">
         <div className="overflow-x-auto w-full">
           <div className="min-w-full inline-block">
             <div className="overflow-hidden">
+              {sortColumn && (
+                <button
+                  className="px-3 py-1 rounded-md mx-1 focus:outline-none bg-light-primary dark:bg-dark-primary text-dark-text dark:text-light-text top-2.5 right-2.5 absolute hover:bg-light-secondary dark:hover:bg-dark-secondary "
+                  onClick={handleRemoveSort}
+                >
+                  <Refresh />
+                </button>
+              )}
               <table>
-                {sortColumn && (
-                  <button
-                    className="px-3 py-1 rounded-md mx-1 focus:outline-none bg-light-primary dark:bg-dark-primary text-dark-text dark:text-light-text top-2.5 right-2.5 absolute hover:bg-light-secondary dark:hover:bg-dark-secondary "
-                    onClick={handleRemoveSort}
-                  >
-                    <Refresh />
-                  </button>
-                )}
                 <thead>
                   <tr>
                     <th
@@ -161,16 +161,18 @@ const Customers = () => {
                         searchTerm ? null : handleSort('companyName');
                       }}
                     >
-                      Company Name{' '}
-                      {sortColumn === 'companyName' ? (
-                        sortDirection === 'asc' ? (
-                          <ArrowDownward />
+                      <div className="w-max sm:w-auto">
+                        Company Name{' '}
+                        {sortColumn === 'companyName' ? (
+                          sortDirection === 'asc' ? (
+                            <ArrowDownward />
+                          ) : (
+                            <ArrowUpward />
+                          )
                         ) : (
-                          <ArrowUpward />
-                        )
-                      ) : (
-                        <SwapVert />
-                      )}
+                          <SwapVert />
+                        )}
+                      </div>
                     </th>
                     <th
                       className="cursor-pointer select-none"
@@ -178,16 +180,18 @@ const Customers = () => {
                         searchTerm ? null : handleSort('address.street');
                       }}
                     >
-                      Street{' '}
-                      {sortColumn === 'address.street' ? (
-                        sortDirection === 'asc' ? (
-                          <ArrowDownward />
+                      <div>
+                        Street{' '}
+                        {sortColumn === 'address.street' ? (
+                          sortDirection === 'asc' ? (
+                            <ArrowDownward />
+                          ) : (
+                            <ArrowUpward />
+                          )
                         ) : (
-                          <ArrowUpward />
-                        )
-                      ) : (
-                        <SwapVert />
-                      )}
+                          <SwapVert />
+                        )}
+                      </div>
                     </th>
                     <th
                       className="cursor-pointer select-none"
@@ -195,16 +199,18 @@ const Customers = () => {
                         searchTerm ? null : handleSort('address.city');
                       }}
                     >
-                      City{' '}
-                      {sortColumn === 'address.city' ? (
-                        sortDirection === 'asc' ? (
-                          <ArrowDownward />
+                      <div>
+                        City{' '}
+                        {sortColumn === 'address.city' ? (
+                          sortDirection === 'asc' ? (
+                            <ArrowDownward />
+                          ) : (
+                            <ArrowUpward />
+                          )
                         ) : (
-                          <ArrowUpward />
-                        )
-                      ) : (
-                        <SwapVert />
-                      )}
+                          <SwapVert />
+                        )}
+                      </div>
                     </th>
                   </tr>
                 </thead>
@@ -230,7 +236,7 @@ const Customers = () => {
             </div>
           </div>
         </div>
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex flex-col gap-y-5 md:flex-row items-center justify-between">
           {!searchTerm && (
             <p
               className={`text-sm text-light-text dark:text-dark-text ${
@@ -247,7 +253,7 @@ const Customers = () => {
             </p>
           )}
           {!searchTerm && rowCount !== 'All' && (
-            <div>
+            <div className="flex items-center justify-between w-full md:w-auto md:justify-end">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}

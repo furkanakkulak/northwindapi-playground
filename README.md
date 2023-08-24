@@ -14,7 +14,7 @@ To get started with this project, follow these steps:
 2. Navigate to the project's directory in your terminal.
 3. Install the project dependencies using the following command: `npm install`
 4. Start the development server: `npm run dev`
-5. Open your web browser and go to [http://localhost:5174](http://localhost:5174) to see the app in action.
+5. Open your web browser and go to [http://localhost:5173](http://localhost:5173) to see the app in action.
 
 ## Features
 

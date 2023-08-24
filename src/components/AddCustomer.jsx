@@ -27,13 +27,13 @@ const AddCustomer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('customers');
       setShowModal(false);
-      setSuccessMessage('Müşteri başarıyla eklendi.');
+      setSuccessMessage('Customer added successfully!');
       setTimeout(() => {
         setSuccessMessage('');
       }, 3000);
     },
     onError: (error) => {
-      setErrorMessage('Bir hata oluştu: ' + error.message);
+      setErrorMessage('An error occurred: ' + error.message);
       setTimeout(() => {
         setErrorMessage('');
       }, 3000);

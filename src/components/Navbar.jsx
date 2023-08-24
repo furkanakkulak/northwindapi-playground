@@ -7,16 +7,33 @@ const Navbar = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
-    const userPreference = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    setIsDarkTheme(userPreference);
+    const storedTheme = localStorage.getItem('theme');
+
+    if (storedTheme === 'dark') {
+      setIsDarkTheme(true);
+    } else if (storedTheme === 'light') {
+      setIsDarkTheme(false);
+    } else {
+      const userPreference = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches;
+      setIsDarkTheme(userPreference);
+      localStorage.setItem('theme', userPreference ? 'dark' : 'light');
+    }
   }, []);
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem('theme', isDarkTheme ? 'light' : 'dark');
   };
 
+  const handleMenuClick = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const handleNavLinkClick = () => {
+    setShowMenu(false);
+  };
   useEffect(() => {
     if (isDarkTheme) {
       document.body.classList.add('dark');
@@ -27,51 +44,45 @@ const Navbar = () => {
     }
   }, [isDarkTheme]);
 
-  const handleMenuClick = () => {
-    setShowMenu(!showMenu);
-  };
-
-  const handleNavLinkClick = () => {
-    setShowMenu(false);
-  };
-
   return (
     <nav>
       <Link
         className="logo"
         to={'/'}
       >
-        Northwind
+        Northwind API
       </Link>
-      <div className="links">
-        <NavLink
-          to={'/customers'}
-          onClick={handleNavLinkClick}
+      <div className="flex items-center space-x-2">
+        <div className="links">
+          <NavLink
+            to={'/customers'}
+            onClick={handleNavLinkClick}
+          >
+            Customers
+          </NavLink>
+          <Link
+            to={null}
+            onClick={handleNavLinkClick}
+          >
+            Products
+          </Link>
+          <Link
+            to={null}
+            onClick={handleNavLinkClick}
+          >
+            Users
+          </Link>
+          <button onClick={toggleTheme}>
+            {isDarkTheme ? <DarkMode /> : <LightMode />}
+          </button>
+        </div>
+        <button
+          onClick={handleMenuClick}
+          className="text-light-text dark:text-dark-text md:hidden"
         >
-          Customers
-        </NavLink>
-        <Link
-          to={null}
-          onClick={handleNavLinkClick}
-        >
-          Products
-        </Link>
-        <Link
-          to={null}
-          onClick={handleNavLinkClick}
-        >
-          Users
-        </Link>
-        <button onClick={toggleTheme}>
-          {isDarkTheme ? <DarkMode /> : <LightMode />}
+          <Menu />
         </button>
       </div>
-      <button
-        onClick={handleMenuClick}
-        className="text-light-text dark:text-dark-text md:hidden"
-      >
-        <Menu />
-      </button>
       {showMenu && (
         <div className="mobile-links">
           <NavLink
